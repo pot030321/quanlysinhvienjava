@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thêm sinh viên</title>
+    <th:block th:replace="layout::link-css"></th:block>
+</head>
+<body>
+<th:block th:replace="layout::header"></th:block>
+<div class="container">
+    <h1>Thêm sinh viên mới</h1>
+    <form th:action="@{/sinhVien/add}" th:object="${sinhVien}" method="post">
+
+        <div class="col-6 mb-3">
+            <label class="form-label" for="mssv">Mã số sinh viên: </label>
+            <input class="form-control" type="text" th:field="*{mssv}" id="mssv">
+            <span th:if="${#fields.hasErrors('mssv')}" th:errors="*{mssv}" class="text-danger"></span>
+        </div>
+        <div class="col-6 mb-3">
+            <label class="form-label" for="hoTen">Họ và tên: </label>
+            <input class="form-control" type="text" th:field="*{hoTen}" id="hoTen">
+            <span th:if="${#fields.hasErrors('hoTen')}" th:errors="*{hoTen}" class="text-danger"></span>
+        </div>
+        <div class="col-6 mb-3">
+            <label class="form-label" for="ngaySinh">Ngày sinh: </label>
+            <input class="form-control" type="date" th:field="*{ngaySinh}" id="ngaySinh">
+            <span th:if="${#fields.hasErrors('ngaySinh')}" th:errors="*{ngaySinh}" class="text-danger"></span>
+        </div>
+        <div class="col-6 mb-3">
+            <label class="form-label" for="email">Email: </label>
+            <input class="form-control" type="text" th:field="*{email}" id="email">
+            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></span>
+        </div>
+        <div class="col-6 mb-3">
+            <label class="form-label" for="lop">Lớp: </label>
+            <select th:field="*{lop.maLop}" id="lop" class="form-select">
+                <option th:each="lop : ${dsLop}" th:value="${lop.maLop}" th:text="${lop.tenLop}"></option>
+            </select>
+            <span th:if="${#fields.hasErrors('lop')}" th:errors="*{lop}" class="text-danger"></span>
+        </div>
+        <input type="submit" class="btn btn-primary" value="Thêm mới">
+    </form>
+    <br>
+    <a th:href="@{/sinhVien}">Trở về</a>
+</div>
+<th:block th:replace="layout::footer"></th:block>
+</body>
+</html>
